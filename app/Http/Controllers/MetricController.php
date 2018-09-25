@@ -89,7 +89,7 @@ class MetricController extends Controller
         ], 400);
         else {
             $newMetric = Metric::find($id);
-            
+
             $oldMetric = new Metric();
             $oldMetric->id = $newMetric->id;
             $oldMetric->created_at = $newMetric->created_at;
@@ -117,7 +117,13 @@ class MetricController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $metric = Metric::find($id);
+        if ($metric == null)
+            return response(['message' => 'Metric not found']);
+        else {
+            $metric->delete();
+            return response(['metricDeleted' => $metric]);
+        }
     }
 
     public function newMetricRules()
