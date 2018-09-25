@@ -17,10 +17,13 @@ class CreateTableKitItems extends Migration
             $table->increments('id');
             $table->unsignedInteger("kit");
             $table->unsignedInteger("item");
+            $table->unsignedInteger('metric');
+            $table->double('quantity');
             $table->timestamps();
 
             $table->foreign("kit")->references('id')->on('kits');
             $table->foreign('item')->references('id')->on('items');
+            $table->foreign('metric')->references('id')->on('metrics');
         });
     }
 

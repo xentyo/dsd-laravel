@@ -15,7 +15,13 @@ class CreateTableDispenserKits extends Migration
     {
         Schema::create('dispenser_kits', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('dispenser');
+            $table->unsignedInteger('kit');
+            $table->double('quantity');
             $table->timestamps();
+
+            $table->foreign('dispenser')->references('id')->on('dispensers');
+            $table->foreign('kit')->references('id')->on('kits');
         });
     }
 

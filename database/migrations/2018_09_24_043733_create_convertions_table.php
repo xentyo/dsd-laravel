@@ -18,6 +18,7 @@ class CreateConvertionsTable extends Migration
             $table->unsignedInteger('metric_from');
             $table->unsignedInteger('metric_to');
             $table->boolean('reversable')->default(true);
+            $table->double('factor');
             $table->timestamps();
 
             $table->foreign('metric_from')->references('id')->on('metrics');

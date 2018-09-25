@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableDispenserItems extends Migration
+class CreateMovementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,18 @@ class CreateTableDispenserItems extends Migration
      */
     public function up()
     {
-        Schema::create('dispenser_items', function (Blueprint $table) {
+        Schema::create('movements', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('dispenser');
             $table->unsignedInteger('item');
+            $table->string('type');
             $table->unsignedInteger('metric');
             $table->double('quantity');
             $table->timestamps();
 
-            
             $table->foreign('dispenser')->references('id')->on('dispensers');
             $table->foreign('item')->references('id')->on('items');
+            $table->foreign('type')->references('name')->on('movement_types');
             $table->foreign('metric')->references('id')->on('metrics');
         });
     }
@@ -35,6 +36,6 @@ class CreateTableDispenserItems extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dispenser_items');
+        Schema::dropIfExists('movements');
     }
 }
