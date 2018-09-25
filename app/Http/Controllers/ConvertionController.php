@@ -14,7 +14,7 @@ class ConvertionController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Convertion::all());
     }
 
     /**
@@ -24,7 +24,7 @@ class ConvertionController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

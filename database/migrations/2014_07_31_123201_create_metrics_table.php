@@ -15,8 +15,8 @@ class CreateMetricsTable extends Migration
             $table->timestamps();
 
             $table->integer('user_id')->unsigned()->nullable();
-            $table->string('name');
-            $table->string('symbol');
+            $table->string('name')->unique();
+            $table->string('symbol')->unique();
 
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('restrict')
