@@ -82,4 +82,17 @@ class DispenserController extends Controller
     {
         //
     }
+
+    public function rulesToStore()
+    {
+        return [
+            'name' => 'required|min:2|max:255|unique:dispensers',
+            'description' => 'present|min:10|max:255'
+        ];
+    }
+
+    public function validator(Request $request, array $rules)
+    {
+        return Validator::make($request->all(), $rules ?? $this->rulesToStore());
+    }
 }

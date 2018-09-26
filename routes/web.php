@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('routes', function() {
+    $routeCollection = Route::getRoutes();
+
+    return view('routes', [$routeCollection]);
+});

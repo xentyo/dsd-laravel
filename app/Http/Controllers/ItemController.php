@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use Illuminate\Http\Request;
+use Validator;
 
 class ItemController extends Controller
 {
@@ -83,11 +84,16 @@ class ItemController extends Controller
         //
     }
 
-    public function ruleToCreateModel()
+    public function rulesToStore()
     {
         return [
             'name' => 'required|min:2|max:255|alpha_num',
             'description' => 'present|min:1|max:255|string'
         ];
+    }
+
+    public function validator(Request $request)
+    {
+        return Validator::make($request->all(), $this->rulesToStore());
     }
 }
