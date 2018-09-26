@@ -15,7 +15,8 @@ class ItemsTableSeeder extends Seeder
     public function run()
     {
         $items = ['AGUJAS', 'CANULAS', 'MASCARILLAS', 'JERINGAS', 'CATETERES', 'GUANTES', 'GABACHAS', 'PRESERVATIVOS', 'SONDAS', 'TUBOS', 'PINZAS', 'ADHESIVOS', 'APÓSITOS', 'GASAS', 'HUATAS', 'VENDAS', 'RESUCITADORES', 'NYLON', 'POLIESTERES', 'POLIPROPILENOS', 'DIALIZADORES', 'IMPLANTES', 'LENTES', 'TROCARS', 'INJERTOS', 'VÁLVULAS'];
-        foreach ($items as $key => $name) $items[$key] = ucfirst(ucwords($name));
+        foreach ($items as $key => $name) $items[$key] = ucfirst(mb_strtolower($name));
+
         $metricPiece = Metric::where('symbol', 'pz')->first();
         $metricPackage = Metric::where('symbol', 'pkg')->first();
         foreach ($items as $key => $name) {
