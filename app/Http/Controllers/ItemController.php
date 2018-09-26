@@ -14,7 +14,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        return response(Item::orderBy('name')->get());
     }
 
     /**
@@ -81,5 +81,13 @@ class ItemController extends Controller
     public function destroy(Item $item)
     {
         //
+    }
+
+    public function ruleToCreateModel()
+    {
+        return [
+            'name' => 'required|min:2|max:255|alpha_num',
+            'description' => 'present|min:1|max:255|string'
+        ];
     }
 }
