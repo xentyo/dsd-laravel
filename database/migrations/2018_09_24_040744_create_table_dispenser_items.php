@@ -15,16 +15,16 @@ class CreateTableDispenserItems extends Migration
     {
         Schema::create('dispenser_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('dispenser');
-            $table->unsignedInteger('item');
-            $table->unsignedInteger('metric');
+            $table->unsignedInteger('dispenser_id');
+            $table->unsignedInteger('item_id');
+            $table->unsignedInteger('metric_id');
             $table->double('quantity');
             $table->timestamps();
 
-            
-            $table->foreign('dispenser')->references('id')->on('dispensers');
-            $table->foreign('item')->references('id')->on('items');
-            $table->foreign('metric')->references('id')->on('metrics');
+
+            $table->foreign('dispenser_id')->references('id')->on('dispensers');
+            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('metric_id')->references('id')->on('metrics');
         });
     }
 

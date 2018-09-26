@@ -15,14 +15,14 @@ class CreateConvertionsTable extends Migration
     {
         Schema::create('convertions', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('metric_from');
-            $table->unsignedInteger('metric_to');
+            $table->unsignedInteger('inventory_id');
+            $table->unsignedInteger('item_id');
             $table->boolean('reversable')->default(true);
             $table->double('factor');
             $table->timestamps();
 
-            $table->foreign('metric_from')->references('id')->on('metrics');
-            $table->foreign('metric_to')->references('id')->on('metrics');
+            $table->foreign('inventory_id')->references('id')->on('inventories');
+            $table->foreign('item_id')->references('id')->on('items');
         });
     }
 

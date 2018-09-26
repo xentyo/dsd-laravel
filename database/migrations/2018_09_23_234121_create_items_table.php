@@ -17,12 +17,12 @@ class CreateItemsTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->string('description')->nullable();
-            $table->unsignedInteger('inventory');
-            $table->unsignedInteger('metric');
+            $table->unsignedInteger('inventory_id');
+            $table->unsignedInteger('metric_id');
             $table->timestamps();
 
-            $table->foreign('inventory')->references('id')->on('inventories');
-            $table->foreign('metric')->references('id')->on('metrics');
+            $table->foreign('inventory_id')->references('id')->on('inventories');
+            $table->foreign('metric_id')->references('id')->on('metrics');
         });
     }
 
