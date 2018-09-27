@@ -15,17 +15,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return response(Item::orderBy('name')->get());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $items = Item::orderBy('name')->get();
+        return response(['items' => $items]);
     }
 
     /**

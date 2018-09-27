@@ -14,17 +14,8 @@ class KitController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $kits = Kit::orderBy('name')->get();
+        return response(['kits' => $kits]);
     }
 
     /**
@@ -34,28 +25,6 @@ class KitController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Kit  $kit
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Kit $kit)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Kit  $kit
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Kit $kit)
     {
         //
     }
