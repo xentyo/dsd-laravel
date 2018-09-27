@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 |
  */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(['as' => 'dsd-api::'], function () {
     Route::resource('dipenser', 'DispenserController')->only(['index', 'update', 'store', 'destroy']);
     Route::resource('convertion', 'ConvertionController')->only(['index', 'update', 'store', 'destroy']);

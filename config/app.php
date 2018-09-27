@@ -161,6 +161,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Stevebauman\Inventory\InventoryServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        PrettyRoutes\ServiceProvider::class,
     ],
 
     /*
