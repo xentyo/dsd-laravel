@@ -22,7 +22,7 @@ Route::group([
 
 Route::group([
     'as' => 'dsd-api::',
-    'middleware' => 'passport:api',
+    'middleware' => 'auth:api',
     'namespace' => 'API'
 ], function () {
     Route::get('user', 'PassportController@getDetails')->name('user');
