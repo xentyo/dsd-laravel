@@ -13,7 +13,19 @@ use Illuminate\Http\Request;
 |
  */
 
-Route::group(['as' => 'dsd-api::', 'middleware' => 'api'], function () {
+Route::group([
+    'as' => 'dsd-auth::'
+], function () {
+    Route::post('register', 'API\PassportController@register')->name('register');
+    Route::post('login', 'API\PassportController@login')->name('login');
+});
+
+Route::group([
+    'as' => 'dsd-api::',
+    'middleware' => 'passport:api',
+    'namespace' => 'API'
+], function () {
+    Route::get('user', 'PassportController@getDetails')->name('user');
     Route::resource('dispenser', 'DispenserController')->only(['index', 'show', 'update', 'store', 'destroy']);
     Route::resource('convertion', 'ConvertionController')->only(['index', 'show', 'update', 'store', 'destroy']);
     Route::resource('item', 'ItemController')->only(['index', 'show', 'update', 'store', 'destroy']);

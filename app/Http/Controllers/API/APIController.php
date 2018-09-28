@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Controllers\Controller;
 
 class APIController extends Controller
 {
