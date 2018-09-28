@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\MovementType;
+use App\Convertion;
 use Illuminate\Http\Request;
 
-class MovementTypeController extends Controller
+class ConvertionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class MovementTypeController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Convertion::all());
     }
 
     /**
@@ -24,7 +24,7 @@ class MovementTypeController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -41,10 +41,10 @@ class MovementTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\MovementType  $movementType
+     * @param  \App\Convertion  $convertion
      * @return \Illuminate\Http\Response
      */
-    public function show(MovementType $movementType)
+    public function show(Convertion $convertion)
     {
         //
     }
@@ -52,10 +52,10 @@ class MovementTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\MovementType  $movementType
+     * @param  \App\Convertion  $convertion
      * @return \Illuminate\Http\Response
      */
-    public function edit(MovementType $movementType)
+    public function edit(Convertion $convertion)
     {
         //
     }
@@ -64,10 +64,10 @@ class MovementTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\MovementType  $movementType
+     * @param  \App\Convertion  $convertion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MovementType $movementType)
+    public function update(Request $request, Convertion $convertion)
     {
         //
     }
@@ -75,10 +75,10 @@ class MovementTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\MovementType  $movementType
+     * @param  \App\Convertion  $convertion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MovementType $movementType)
+    public function destroy(Convertion $convertion)
     {
         //
     }

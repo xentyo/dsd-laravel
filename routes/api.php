@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
  */
 
-Route::group(['as' => 'dsd-api::'], function () {
+Route::group(['as' => 'dsd-api::', 'middleware' => 'api'], function () {
     Route::resource('dispenser', 'DispenserController')->only(['index', 'show', 'update', 'store', 'destroy']);
     Route::resource('convertion', 'ConvertionController')->only(['index', 'show', 'update', 'store', 'destroy']);
     Route::resource('item', 'ItemController')->only(['index', 'show', 'update', 'store', 'destroy']);
