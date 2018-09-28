@@ -3,88 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Item;
-use Illuminate\Http\Request;
-use Validator;
 
-class ItemController extends Controller
+class ItemController extends APIController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $items = Item::orderBy('name')->get();
-        return response(['items' => $items]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Item $item)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Item $item)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Item $item)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Item $item)
-    {
-        //
-    }
-
-    public function rulesToStore()
-    {
-        return [
-            'name' => 'required|min:2|max:255|alpha_num',
-            'description' => 'present|min:1|max:255|string'
-        ];
-    }
-
-    public function validator(Request $request)
-    {
-        return Validator::make($request->all(), $this->rulesToStore());
-    }
+    protected $class = Item::class;
+    protected $model = 'Item';
+    protected $ids = ['inventory', 'metric'];
+    protected $storeRules = [
+        'name' => 'required|min:2|max:255|alpha_num',
+        'inventory' => 'required|integer',
+        'metric' => 'required|integer',
+        'description' => 'present|max:255|string|nullable',
+    ];
 }

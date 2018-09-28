@@ -16,7 +16,8 @@
         "laravel/tinker": "^1.0",
         "markrogoyski/math-php": "^0.45.0",
         "spatie/laravel-permission": "^2.20",
-        "stevebauman/inventory": "^1.7"
+        "stevebauman/inventory": "^1.7",
+        "tcg/voyager": "^1.1"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

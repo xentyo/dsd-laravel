@@ -14,11 +14,12 @@ use Illuminate\Http\Request;
  */
 
 Route::group(['as' => 'dsd-api::'], function () {
-    Route::resource('dipenser', 'DispenserController')->only(['index', 'update', 'store', 'destroy']);
-    Route::resource('convertion', 'ConvertionController')->only(['index', 'update', 'store', 'destroy']);
-    Route::resource('item', 'ItemController')->only(['index', 'update', 'store', 'destroy']);
-    Route::resource('kit', 'KitController')->only(['index', 'update', 'store', 'destroy']);
-    Route::resource('movement', 'MovementController')->only(['index', 'update', 'store', 'destroy']);
-    Route::resource('movement-type', 'MovementTypeController')->only(['index', 'update', 'store', 'destroy']);
-    Route::resource('metric', 'MetricController')->only(['index', 'update', 'store', 'destroy']);
+    Route::resource('dispenser', 'DispenserController')->only(['index', 'show', 'update', 'store', 'destroy']);
+    Route::resource('convertion', 'ConvertionController')->only(['index', 'show', 'update', 'store', 'destroy']);
+    Route::resource('item', 'ItemController')->only(['index', 'show', 'update', 'store', 'destroy']);
+    Route::resource('kit', 'KitController')->only(['index', 'show', 'update', 'store', 'destroy']);
+    Route::resource('movement', 'MovementController')->only(['index', 'show', 'update', 'store', 'destroy']);
+    Route::resource('movement-type', 'MovementTypeController')->only(['index', 'show', 'update', 'store', 'destroy']);
+    Route::resource('metric', 'MetricController')->only(['index', 'show', 'update', 'store', 'destroy']);
+    Route::resource('inventory', 'InventoryController')->only(['index', 'show', 'update', 'store', 'destroy']);
 });

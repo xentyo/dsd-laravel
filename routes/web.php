@@ -14,5 +14,3 @@
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
-
-Route::get('routes-list', 'RoutesController@index');
