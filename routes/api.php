@@ -14,24 +14,26 @@ use Illuminate\Http\Request;
  */
 
 Route::group([
-    'as' => 'dsd-auth::'
-], function () {
-    Route::post('register', 'API\PassportController@register')->name('register');
-    Route::post('login', 'API\PassportController@login')->name('login');
-});
-
-Route::group([
-    'as' => 'dsd-api::',
-    'middleware' => 'auth:api',
     'namespace' => 'API'
 ], function () {
-    Route::get('user', 'PassportController@getDetails')->name('user');
-    Route::resource('dispenser', 'DispenserController')->only(['index', 'show', 'update', 'store', 'destroy']);
-    Route::resource('convertion', 'ConvertionController')->only(['index', 'show', 'update', 'store', 'destroy']);
-    Route::resource('item', 'ItemController')->only(['index', 'show', 'update', 'store', 'destroy']);
-    Route::resource('kit', 'KitController')->only(['index', 'show', 'update', 'store', 'destroy']);
-    Route::resource('movement', 'MovementController')->only(['index', 'show', 'update', 'store', 'destroy']);
-    Route::resource('movement-type', 'MovementTypeController')->only(['index', 'show', 'update', 'store', 'destroy']);
-    Route::resource('metric', 'MetricController')->only(['index', 'show', 'update', 'store', 'destroy']);
-    Route::resource('inventory', 'InventoryController')->only(['index', 'show', 'update', 'store', 'destroy']);
+    Route::group([
+        'as' => 'dsd-auth::'
+    ], function () {
+        Route::post('register', 'PassportController@register')->name('register');
+        Route::post('login', 'PassportController@login')->name('login');
+        Route::get('user', 'PassportController@getDetails')->middleware('auth:api')->name('user');
+    });
+    Route::group([
+        'as' => 'dsd-api::',
+        'middleware' => 'auth:api'
+    ], function () {
+        Route::resource('dispenser', 'DispenserController')->only(['index', 'show', 'update', 'store', 'destroy']);
+        Route::resource('convertion', 'ConvertionController')->only(['index', 'show', 'update', 'store', 'destroy']);
+        Route::resource('item', 'ItemController')->only(['index', 'show', 'update', 'store', 'destroy']);
+        Route::resource('kit', 'KitController')->only(['index', 'show', 'update', 'store', 'destroy']);
+        Route::resource('movement', 'MovementController')->only(['index', 'show', 'update', 'store', 'destroy']);
+        Route::resource('movement-type', 'MovementTypeController')->only(['index', 'show', 'update', 'store', 'destroy']);
+        Route::resource('metric', 'MetricController')->only(['index', 'show', 'update', 'store', 'destroy']);
+        Route::resource('inventory', 'InventoryController')->only(['index', 'show', 'update', 'store', 'destroy']);
+    });
 });

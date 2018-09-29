@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE','UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -161,6 +161,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Stevebauman\Inventory\InventoryServiceProvider::class,
         PrettyRoutes\ServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
     ],
 
     /*
