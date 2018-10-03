@@ -4,9 +4,11 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Lcobucci\JWT\Parser;
 use Validator;
 use Auth;
+use App\User;
 
 class UserController extends Controller
 {
@@ -14,9 +16,28 @@ class UserController extends Controller
         'email' =>  'required|email|exists:users,email',
         'password' => 'required'
     ];
+    protected $registerRules = [
+        'name' => 'required|min:2|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:8|max:255',
+        'confirmation_password' => 'required|min:8|max:255'
+    ];
 
     public function register(Request $request){
-        
+        $params = $request->only('name', 'email', 'password', 'confirmation_password');
+        $validator = Validator::make($params, $this->registerRules);
+        if(!$validator->fails()){
+            $user = new User([
+                'name' => $params['name'],
+                'email' => $params['email'],
+                'password' => Hash::make($params['password'])
+            ]);
+            $user->save();
+            return response($user, 200);
+        }
+        else {
+            return response($validator->messages(), 401);
+        }
     }
 
     public function login(Request $request) {
