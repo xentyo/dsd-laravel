@@ -19,14 +19,15 @@ Route::group([
     Route::group([
         'as' => 'dsd-auth::'
     ], function () {
-        Route::post('register', 'PassportController@register')->name('register');
-        Route::post('login', 'PassportController@login')->name('login');
-        Route::get('user', 'PassportController@getDetails')->middleware('auth:api')->name('user');
+        Route::post('login', "UserController@login")->middleware('api')->name('login');
+        Route::post('register', "UserController@register")->middleware('api')->name('register');
     });
     Route::group([
         'as' => 'dsd-api::',
         'middleware' => 'auth:api'
     ], function () {
+        Route::post('logout', "UserController@logout")->middleware('api')->name('logout');
+        Route::get('user', 'UserController@show')->middleware('auth:api')->name('user');
         Route::resource('dispenser', 'DispenserController')->only(['index', 'show', 'update', 'store', 'destroy']);
         Route::resource('convertion', 'ConvertionController')->only(['index', 'show', 'update', 'store', 'destroy']);
         Route::resource('item', 'ItemController')->only(['index', 'show', 'update', 'store', 'destroy']);
