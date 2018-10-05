@@ -44,9 +44,11 @@ class APIController extends Controller
         $sort = $this->getSort($request->input('sort')) ?? $this->defaultSort;
         $objectsArray = forward_static_call($this->class . "::orderBy", $sort)->get();
         if (count($objectsArray) === 0) {
-            $response = response([$this->modelListName => $objectsArray]);
+            $message = 'No ' . str_plural()($this->model) . " found";
+            $response = response(['message' => $message, $this->modelListName => $objectsArray]);
         } else {
-            $response = response([$this->modelListName => $objectsArray]);
+            $message = count($objectsArray) . ' ' . str_plural($this->model) . " found";
+            $response = response(['message' => $message, $this->modelListName => $objectsArray]);
         }
 
         return $response;

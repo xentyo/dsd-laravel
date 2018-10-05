@@ -22,6 +22,8 @@ class CreateTableDispenserKits extends Migration
 
             $table->foreign('dispenser_id')->references('id')->on('dispensers');
             $table->foreign('kit_id')->references('id')->on('kits');
+
+            $table->unique(['dispenser_id', 'kit_id']);
         });
     }
 
