@@ -26,15 +26,17 @@ Route::group([
         'as' => 'dsd-api::',
         'middleware' => 'auth:api'
     ], function () {
+        $apiMethods = ['index', 'show', 'update', 'store', 'destroy'];
+        
         Route::post('logout', "UserController@logout")->middleware('api')->name('logout');
         Route::get('user', 'UserController@show')->middleware('auth:api')->name('user');
-        Route::resource('dispenser', 'DispenserController')->only(['index', 'show', 'update', 'store', 'destroy']);
-        Route::resource('convertion', 'ConvertionController')->only(['index', 'show', 'update', 'store', 'destroy']);
-        Route::resource('item', 'ItemController')->only(['index', 'show', 'update', 'store', 'destroy']);
-        Route::resource('kit', 'KitController')->only(['index', 'show', 'update', 'store', 'destroy']);
-        Route::resource('movement', 'MovementController')->only(['index', 'show', 'update', 'store', 'destroy']);
-        Route::resource('movement-type', 'MovementTypeController')->only(['index', 'show', 'update', 'store', 'destroy']);
-        Route::resource('metric', 'MetricController')->only(['index', 'show', 'update', 'store', 'destroy']);
-        Route::resource('inventory', 'InventoryController')->only(['index', 'show', 'update', 'store', 'destroy']);
+        Route::resource('dispenser', 'DispenserController')->only($apiMethods);
+        Route::resource('convertion', 'ConvertionController')->only($apiMethods);
+        Route::resource('item', 'ItemController')->only($apiMethods);
+        Route::resource('kit', 'KitController')->only($apiMethods);
+        Route::resource('movement', 'MovementController')->only($apiMethods);
+        Route::resource('movement-type', 'MovementTypeController')->only($apiMethods);
+        Route::resource('metric', 'MetricController')->only($apiMethods);
+        Route::resource('inventory', 'InventoryController')->only($apiMethods);
     });
 });
