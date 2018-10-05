@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use Validator;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Validator;
 
 class APIController extends Controller
 {
@@ -13,16 +13,24 @@ class APIController extends Controller
     protected $model = '';
     protected $modelName = '';
     protected $modelListName = '';
-    protected $orderBy = 'name';
+    protected $defaultSort = 'name';
     protected $storeRules = [];
     protected $updateRules = [];
     protected $ids = [];
+    protected $sorts = [];
 
     public function __construct(array $attributes = [])
     {
         $this->modelName = strtolower($this->model);
         $this->modelListName = str_plural($this->modelName);
-        if (count($this->updateRules) < 1) $this->updateRules = $this->storeRules;
+        if (count($this->updateRules) < 1) {
+            $this->updateRules = $this->storeRules;
+        }
+
+        if (count($this->sorts) < 1) {
+            $this->sorts = \Schema::getColumnListing(app($this->class)->getTable());
+        }
+
     }
 
     /**
@@ -30,14 +38,17 @@ class APIController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $response = response();
-        $objectsArray = forward_static_call($this->class . "::orderBy", $this->orderBy)->get();
-        if (count($objectsArray) === 0)
+        $sort = $this->getSort($request->input('sort')) ?? $this->defaultSort;
+        $objectsArray = forward_static_call($this->class . "::orderBy", $sort)->get();
+        if (count($objectsArray) === 0) {
             $response = response([$this->modelListName => $objectsArray]);
-        else
+        } else {
             $response = response([$this->modelListName => $objectsArray]);
+        }
+
         return $response;
     }
 
@@ -59,6 +70,7 @@ class APIController extends Controller
             $object->save();
             $response = response([$this->modelName => $object]);
         }
+
         return $response;
     }
 
@@ -74,14 +86,15 @@ class APIController extends Controller
         if ($object === null) {
             $response = response([
                 'message' => $this->model . ' not found',
-                $this->modelName => $object
+                $this->modelName => $object,
             ]);
         } else {
             $response = response([
                 'message' => $this->model . ' found',
-                $this->modelName => $object
+                $this->modelName => $object,
             ]);
         }
+
         return $response;
     }
 
@@ -102,7 +115,7 @@ class APIController extends Controller
             if ($object === null) {
                 $response = response([
                     'message' => $this->model . ' not found',
-                    $this->modelName => $object
+                    $this->modelName => $object,
                 ]);
             } else {
                 $this->assignAttributes($object, $request->all());
@@ -110,6 +123,7 @@ class APIController extends Controller
                 $response = response($object);
             }
         }
+
         return $response;
     }
 
@@ -122,33 +136,51 @@ class APIController extends Controller
     public function destroy($id)
     {
         $object = forward_static_call([$this->class, 'find'], $id);
-        if ($object === null) $response = response([
-            'message' => $this->model . ' not found',
-            $this->modelName => $object
-        ]);
-        else {
+        if ($object === null) {
+            $response = response([
+                'message' => $this->model . ' not found',
+                $this->modelName => $object,
+            ]);
+        } else {
             $object->delete();
             $response = response([
-                'message' => $this->model . ' deleted.',
-                $this->modelName => $object
+                'message' => $this->model . ' deleted',
+                $this->modelName => $object,
             ]);
         }
+
         return $response;
     }
 
-    private function isId(string $param)
+    protected function isId(string $param)
     {
-        $is = false;
-        foreach ($this->ids as $id)
-            if (!$is && $id === $param) $is = true;
-        return $is;
+        foreach ($this->ids as $id) {
+            if ($id === $param) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected function getSort($sort)
+    {
+        foreach ($this->sorts as $key => $value) {
+            if ($sort === $value) {
+                return $value;
+            }
+        }
+
+        return null;
     }
 
     private function assignAttributes(Model $model, array $attributes)
     {
         foreach ($attributes as $attribute => $value) {
-            if ($this->isId($attribute))
+            if ($this->isId($attribute)) {
                 $attribute = $attribute . '_id';
+            }
+
             $model->$attribute = $value;
         }
     }
