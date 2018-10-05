@@ -26,7 +26,7 @@ class CreateTableDispenserItems extends Migration
             $table->foreign('item_id')->references('id')->on('items');
             $table->foreign('metric_id')->references('id')->on('metrics');
 
-            $table->unque(['dispenser_id', 'item_id', 'metric_id']);
+            $table->unique(['dispenser_id', 'item_id', 'metric_id']);
         });
     }
 
