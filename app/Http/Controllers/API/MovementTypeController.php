@@ -7,4 +7,6 @@ use Illuminate\Http\Request;
 
 class MovementTypeController extends APIController
 {
+    protected $class = MovementType::class;
+    protected $model = "MovementType";
 }
