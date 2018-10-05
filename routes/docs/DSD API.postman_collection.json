@@ -1,0 +1,653 @@
+{
+	"info": {
+		"_postman_id": "f9efce32-bee1-4bf8-833e-51c400a76ef8",
+		"name": "DSD API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Firstname Lastname",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "example@email.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "s3cur3p4S5@w0rd",
+							"type": "text"
+						},
+						{
+							"key": "confirmation_password",
+							"value": "s3cur3p4S5@w0rd",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "example@email.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "s3cur3p4S5@w0rd",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImVmNWU3YWU0ZWZlMjEwNDkxMjM5MWViOTFlYTllOWNiODBiNmQyODQzOTI0ODkwY2Q4MTU5NDIyYmY2N2Y2NjM2YmM3ZjYzNmI2MzAxNzQyIn0.eyJhdWQiOiIxIiwianRpIjoiZWY1ZTdhZTRlZmUyMTA0OTEyMzkxZWI5MWVhOWU5Y2I4MGI2ZDI4NDM5MjQ4OTBjZDgxNTk0MjJiZjY3ZjY2MzZiYzdmNjM2YjYzMDE3NDIiLCJpYXQiOjE1Mzg3NjMxMzcsIm5iZiI6MTUzODc2MzEzNywiZXhwIjoxNTcwMjk5MTM3LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.TLwJaEmDPW00j0lr9UfG_J6vlrfZ9Mtlf7ipCqTHRo98FZLSlWVaeckm_r1O8Ha1MdrlQNL4HONSBwn3iU0IY4o6c1iIiYooLP_6FtUw3XNFV2vQqYgdDK5eSVP364ZWv3P5U87m9Qyf2iiQz2gS8bYagd5yVSrjp3Lr_SP9sPC8Xfxgybjmqu1jynNJbdTcdihsm-gKbB21vKoAHh_93rj5jMYGIYFenUkDthA3RO60GVf9c-utTibN2SFWpDs_UOREOKVrEnEVusNskHSW-GZc45BrYdX9yMcNaV84-Mnp5AYs-cixhS4JYCdmtjnbQWKeOvDUGo4y_2LOhdNkck7ceJx9osLiGzClJGizoI5syQCvT-asihGS93Ti8dwU3YijyN6rj0LNPAuv4rlGZGRkptp-rlanMbsMam0VADQWdZTzR_zMXD7Zt91t_aTcNAVrKdCX2FiDbIHRXJzsU_3u8p7Ki4ySYNEcHHhy5BL_ykdINIyNSUBRhe1GalvvXVtR4hqJVb5Zjkv5ItnNAJbW_5kQSSkQndL6T55YFZ_ZldIEw6dbydJSeZl2n7HO4pgBcJwpGkEliiN7NVgtXAPBQITOwByQbHw3hl15mCH5vpGnHBfkynh2Qn0H9-GSo86U5Ua1zYvS4gxHqEoQJEdU9qQYTHpJ4LXejpmVES4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRkYjA2YWZmOTQ1NjdhMTcxYjE1ZWY3OWM4NGU0NGQyZDJmNDNlZjhmYWUyZGJhM2E1ZjI4OGYwOGY0YWQzMDkwZjNmZThlNjcxYTc2ZWU5In0.eyJhdWQiOiIxIiwianRpIjoiNGRiMDZhZmY5NDU2N2ExNzFiMTVlZjc5Yzg0ZTQ0ZDJkMmY0M2VmOGZhZTJkYmEzYTVmMjg4ZjA4ZjRhZDMwOTBmM2ZlOGU2NzFhNzZlZTkiLCJpYXQiOjE1Mzg3NTc4NjIsIm5iZiI6MTUzODc1Nzg2MiwiZXhwIjoxNTcwMjkzODYyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.FzVWlrZZUk1srHFEax1tymqVZEV9DIWQlNo-qxim9djLzEOlE4tWErLwkayeCHE1Y_tPHBYX2hzre9tVxUCxPQ3skMjMMGTqRdWxNCcIyofvjJzPeJ9MTAAhBZSqGkGA14eIYmQggAxS9lqylu3pX0yY4bM8JoS1zycJVhoqW-ROxXNwcxTgS25eORSzjcsoX7MhtVbr7mtuj37x5BUHDxSew8F_LUBUjyYErC4uJUwy0thjjJGvQuKjXLIe3vL0iD0LjpYupUV5pqPLqjjfGittMyl7rlQkVSCMKZ9HCK2Ewrr83orCuM0NkrG9Egl7x5EkuQ2Fggv1rYbpEi1JuFnc0ldx-bDu5o-lyh1X9Rm61et0xy_qnH9vFymCgMQRsZWboyoi6yjs3qL2VXCSdeBNuPc1c0OuuyX0yUoaR5v77T7dAY3Li-6EPI6z3E4n9L3lilpdE8RbsbvCdHxXDJfD0EEneXpFtfnjPCZbDB1hH_8Tpod546gxGpJ7-J5VdVlYkOJrYiU50mUqerCihOx5cqL7gEepcx5lrE2xuOH8016DWf-JDTVkX9JD2C8B1lUZyIuV48c1pnscQ2YhYlhdtQajbs5DKOA-xnXMtwdeqURy4d5Wo4vH81m5zcBHpwXWISxU8IwvmtsQSSTEjn87g9H71TSlSNbnEa2AfrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Metric",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRkYjA2YWZmOTQ1NjdhMTcxYjE1ZWY3OWM4NGU0NGQyZDJmNDNlZjhmYWUyZGJhM2E1ZjI4OGYwOGY0YWQzMDkwZjNmZThlNjcxYTc2ZWU5In0.eyJhdWQiOiIxIiwianRpIjoiNGRiMDZhZmY5NDU2N2ExNzFiMTVlZjc5Yzg0ZTQ0ZDJkMmY0M2VmOGZhZTJkYmEzYTVmMjg4ZjA4ZjRhZDMwOTBmM2ZlOGU2NzFhNzZlZTkiLCJpYXQiOjE1Mzg3NTc4NjIsIm5iZiI6MTUzODc1Nzg2MiwiZXhwIjoxNTcwMjkzODYyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.FzVWlrZZUk1srHFEax1tymqVZEV9DIWQlNo-qxim9djLzEOlE4tWErLwkayeCHE1Y_tPHBYX2hzre9tVxUCxPQ3skMjMMGTqRdWxNCcIyofvjJzPeJ9MTAAhBZSqGkGA14eIYmQggAxS9lqylu3pX0yY4bM8JoS1zycJVhoqW-ROxXNwcxTgS25eORSzjcsoX7MhtVbr7mtuj37x5BUHDxSew8F_LUBUjyYErC4uJUwy0thjjJGvQuKjXLIe3vL0iD0LjpYupUV5pqPLqjjfGittMyl7rlQkVSCMKZ9HCK2Ewrr83orCuM0NkrG9Egl7x5EkuQ2Fggv1rYbpEi1JuFnc0ldx-bDu5o-lyh1X9Rm61et0xy_qnH9vFymCgMQRsZWboyoi6yjs3qL2VXCSdeBNuPc1c0OuuyX0yUoaR5v77T7dAY3Li-6EPI6z3E4n9L3lilpdE8RbsbvCdHxXDJfD0EEneXpFtfnjPCZbDB1hH_8Tpod546gxGpJ7-J5VdVlYkOJrYiU50mUqerCihOx5cqL7gEepcx5lrE2xuOH8016DWf-JDTVkX9JD2C8B1lUZyIuV48c1pnscQ2YhYlhdtQajbs5DKOA-xnXMtwdeqURy4d5Wo4vH81m5zcBHpwXWISxU8IwvmtsQSSTEjn87g9H71TSlSNbnEa2AfrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Metre",
+							"type": "text"
+						},
+						{
+							"key": "symbol",
+							"value": "m",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/metric",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"metric"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Metrics",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRkYjA2YWZmOTQ1NjdhMTcxYjE1ZWY3OWM4NGU0NGQyZDJmNDNlZjhmYWUyZGJhM2E1ZjI4OGYwOGY0YWQzMDkwZjNmZThlNjcxYTc2ZWU5In0.eyJhdWQiOiIxIiwianRpIjoiNGRiMDZhZmY5NDU2N2ExNzFiMTVlZjc5Yzg0ZTQ0ZDJkMmY0M2VmOGZhZTJkYmEzYTVmMjg4ZjA4ZjRhZDMwOTBmM2ZlOGU2NzFhNzZlZTkiLCJpYXQiOjE1Mzg3NTc4NjIsIm5iZiI6MTUzODc1Nzg2MiwiZXhwIjoxNTcwMjkzODYyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.FzVWlrZZUk1srHFEax1tymqVZEV9DIWQlNo-qxim9djLzEOlE4tWErLwkayeCHE1Y_tPHBYX2hzre9tVxUCxPQ3skMjMMGTqRdWxNCcIyofvjJzPeJ9MTAAhBZSqGkGA14eIYmQggAxS9lqylu3pX0yY4bM8JoS1zycJVhoqW-ROxXNwcxTgS25eORSzjcsoX7MhtVbr7mtuj37x5BUHDxSew8F_LUBUjyYErC4uJUwy0thjjJGvQuKjXLIe3vL0iD0LjpYupUV5pqPLqjjfGittMyl7rlQkVSCMKZ9HCK2Ewrr83orCuM0NkrG9Egl7x5EkuQ2Fggv1rYbpEi1JuFnc0ldx-bDu5o-lyh1X9Rm61et0xy_qnH9vFymCgMQRsZWboyoi6yjs3qL2VXCSdeBNuPc1c0OuuyX0yUoaR5v77T7dAY3Li-6EPI6z3E4n9L3lilpdE8RbsbvCdHxXDJfD0EEneXpFtfnjPCZbDB1hH_8Tpod546gxGpJ7-J5VdVlYkOJrYiU50mUqerCihOx5cqL7gEepcx5lrE2xuOH8016DWf-JDTVkX9JD2C8B1lUZyIuV48c1pnscQ2YhYlhdtQajbs5DKOA-xnXMtwdeqURy4d5Wo4vH81m5zcBHpwXWISxU8IwvmtsQSSTEjn87g9H71TSlSNbnEa2AfrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/metric",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"metric"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Metric",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRkYjA2YWZmOTQ1NjdhMTcxYjE1ZWY3OWM4NGU0NGQyZDJmNDNlZjhmYWUyZGJhM2E1ZjI4OGYwOGY0YWQzMDkwZjNmZThlNjcxYTc2ZWU5In0.eyJhdWQiOiIxIiwianRpIjoiNGRiMDZhZmY5NDU2N2ExNzFiMTVlZjc5Yzg0ZTQ0ZDJkMmY0M2VmOGZhZTJkYmEzYTVmMjg4ZjA4ZjRhZDMwOTBmM2ZlOGU2NzFhNzZlZTkiLCJpYXQiOjE1Mzg3NTc4NjIsIm5iZiI6MTUzODc1Nzg2MiwiZXhwIjoxNTcwMjkzODYyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.FzVWlrZZUk1srHFEax1tymqVZEV9DIWQlNo-qxim9djLzEOlE4tWErLwkayeCHE1Y_tPHBYX2hzre9tVxUCxPQ3skMjMMGTqRdWxNCcIyofvjJzPeJ9MTAAhBZSqGkGA14eIYmQggAxS9lqylu3pX0yY4bM8JoS1zycJVhoqW-ROxXNwcxTgS25eORSzjcsoX7MhtVbr7mtuj37x5BUHDxSew8F_LUBUjyYErC4uJUwy0thjjJGvQuKjXLIe3vL0iD0LjpYupUV5pqPLqjjfGittMyl7rlQkVSCMKZ9HCK2Ewrr83orCuM0NkrG9Egl7x5EkuQ2Fggv1rYbpEi1JuFnc0ldx-bDu5o-lyh1X9Rm61et0xy_qnH9vFymCgMQRsZWboyoi6yjs3qL2VXCSdeBNuPc1c0OuuyX0yUoaR5v77T7dAY3Li-6EPI6z3E4n9L3lilpdE8RbsbvCdHxXDJfD0EEneXpFtfnjPCZbDB1hH_8Tpod546gxGpJ7-J5VdVlYkOJrYiU50mUqerCihOx5cqL7gEepcx5lrE2xuOH8016DWf-JDTVkX9JD2C8B1lUZyIuV48c1pnscQ2YhYlhdtQajbs5DKOA-xnXMtwdeqURy4d5Wo4vH81m5zcBHpwXWISxU8IwvmtsQSSTEjn87g9H71TSlSNbnEa2AfrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Metre",
+							"type": "text"
+						},
+						{
+							"key": "symbol",
+							"value": "m",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/metric/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"metric",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Metric",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRkYjA2YWZmOTQ1NjdhMTcxYjE1ZWY3OWM4NGU0NGQyZDJmNDNlZjhmYWUyZGJhM2E1ZjI4OGYwOGY0YWQzMDkwZjNmZThlNjcxYTc2ZWU5In0.eyJhdWQiOiIxIiwianRpIjoiNGRiMDZhZmY5NDU2N2ExNzFiMTVlZjc5Yzg0ZTQ0ZDJkMmY0M2VmOGZhZTJkYmEzYTVmMjg4ZjA4ZjRhZDMwOTBmM2ZlOGU2NzFhNzZlZTkiLCJpYXQiOjE1Mzg3NTc4NjIsIm5iZiI6MTUzODc1Nzg2MiwiZXhwIjoxNTcwMjkzODYyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.FzVWlrZZUk1srHFEax1tymqVZEV9DIWQlNo-qxim9djLzEOlE4tWErLwkayeCHE1Y_tPHBYX2hzre9tVxUCxPQ3skMjMMGTqRdWxNCcIyofvjJzPeJ9MTAAhBZSqGkGA14eIYmQggAxS9lqylu3pX0yY4bM8JoS1zycJVhoqW-ROxXNwcxTgS25eORSzjcsoX7MhtVbr7mtuj37x5BUHDxSew8F_LUBUjyYErC4uJUwy0thjjJGvQuKjXLIe3vL0iD0LjpYupUV5pqPLqjjfGittMyl7rlQkVSCMKZ9HCK2Ewrr83orCuM0NkrG9Egl7x5EkuQ2Fggv1rYbpEi1JuFnc0ldx-bDu5o-lyh1X9Rm61et0xy_qnH9vFymCgMQRsZWboyoi6yjs3qL2VXCSdeBNuPc1c0OuuyX0yUoaR5v77T7dAY3Li-6EPI6z3E4n9L3lilpdE8RbsbvCdHxXDJfD0EEneXpFtfnjPCZbDB1hH_8Tpod546gxGpJ7-J5VdVlYkOJrYiU50mUqerCihOx5cqL7gEepcx5lrE2xuOH8016DWf-JDTVkX9JD2C8B1lUZyIuV48c1pnscQ2YhYlhdtQajbs5DKOA-xnXMtwdeqURy4d5Wo4vH81m5zcBHpwXWISxU8IwvmtsQSSTEjn87g9H71TSlSNbnEa2AfrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/metric/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"metric",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Metric",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRkYjA2YWZmOTQ1NjdhMTcxYjE1ZWY3OWM4NGU0NGQyZDJmNDNlZjhmYWUyZGJhM2E1ZjI4OGYwOGY0YWQzMDkwZjNmZThlNjcxYTc2ZWU5In0.eyJhdWQiOiIxIiwianRpIjoiNGRiMDZhZmY5NDU2N2ExNzFiMTVlZjc5Yzg0ZTQ0ZDJkMmY0M2VmOGZhZTJkYmEzYTVmMjg4ZjA4ZjRhZDMwOTBmM2ZlOGU2NzFhNzZlZTkiLCJpYXQiOjE1Mzg3NTc4NjIsIm5iZiI6MTUzODc1Nzg2MiwiZXhwIjoxNTcwMjkzODYyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.FzVWlrZZUk1srHFEax1tymqVZEV9DIWQlNo-qxim9djLzEOlE4tWErLwkayeCHE1Y_tPHBYX2hzre9tVxUCxPQ3skMjMMGTqRdWxNCcIyofvjJzPeJ9MTAAhBZSqGkGA14eIYmQggAxS9lqylu3pX0yY4bM8JoS1zycJVhoqW-ROxXNwcxTgS25eORSzjcsoX7MhtVbr7mtuj37x5BUHDxSew8F_LUBUjyYErC4uJUwy0thjjJGvQuKjXLIe3vL0iD0LjpYupUV5pqPLqjjfGittMyl7rlQkVSCMKZ9HCK2Ewrr83orCuM0NkrG9Egl7x5EkuQ2Fggv1rYbpEi1JuFnc0ldx-bDu5o-lyh1X9Rm61et0xy_qnH9vFymCgMQRsZWboyoi6yjs3qL2VXCSdeBNuPc1c0OuuyX0yUoaR5v77T7dAY3Li-6EPI6z3E4n9L3lilpdE8RbsbvCdHxXDJfD0EEneXpFtfnjPCZbDB1hH_8Tpod546gxGpJ7-J5VdVlYkOJrYiU50mUqerCihOx5cqL7gEepcx5lrE2xuOH8016DWf-JDTVkX9JD2C8B1lUZyIuV48c1pnscQ2YhYlhdtQajbs5DKOA-xnXMtwdeqURy4d5Wo4vH81m5zcBHpwXWISxU8IwvmtsQSSTEjn87g9H71TSlSNbnEa2AfrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/metric/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"metric",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Inventory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRkYjA2YWZmOTQ1NjdhMTcxYjE1ZWY3OWM4NGU0NGQyZDJmNDNlZjhmYWUyZGJhM2E1ZjI4OGYwOGY0YWQzMDkwZjNmZThlNjcxYTc2ZWU5In0.eyJhdWQiOiIxIiwianRpIjoiNGRiMDZhZmY5NDU2N2ExNzFiMTVlZjc5Yzg0ZTQ0ZDJkMmY0M2VmOGZhZTJkYmEzYTVmMjg4ZjA4ZjRhZDMwOTBmM2ZlOGU2NzFhNzZlZTkiLCJpYXQiOjE1Mzg3NTc4NjIsIm5iZiI6MTUzODc1Nzg2MiwiZXhwIjoxNTcwMjkzODYyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.FzVWlrZZUk1srHFEax1tymqVZEV9DIWQlNo-qxim9djLzEOlE4tWErLwkayeCHE1Y_tPHBYX2hzre9tVxUCxPQ3skMjMMGTqRdWxNCcIyofvjJzPeJ9MTAAhBZSqGkGA14eIYmQggAxS9lqylu3pX0yY4bM8JoS1zycJVhoqW-ROxXNwcxTgS25eORSzjcsoX7MhtVbr7mtuj37x5BUHDxSew8F_LUBUjyYErC4uJUwy0thjjJGvQuKjXLIe3vL0iD0LjpYupUV5pqPLqjjfGittMyl7rlQkVSCMKZ9HCK2Ewrr83orCuM0NkrG9Egl7x5EkuQ2Fggv1rYbpEi1JuFnc0ldx-bDu5o-lyh1X9Rm61et0xy_qnH9vFymCgMQRsZWboyoi6yjs3qL2VXCSdeBNuPc1c0OuuyX0yUoaR5v77T7dAY3Li-6EPI6z3E4n9L3lilpdE8RbsbvCdHxXDJfD0EEneXpFtfnjPCZbDB1hH_8Tpod546gxGpJ7-J5VdVlYkOJrYiU50mUqerCihOx5cqL7gEepcx5lrE2xuOH8016DWf-JDTVkX9JD2C8B1lUZyIuV48c1pnscQ2YhYlhdtQajbs5DKOA-xnXMtwdeqURy4d5Wo4vH81m5zcBHpwXWISxU8IwvmtsQSSTEjn87g9H71TSlSNbnEa2AfrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Vendaje 2m",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Vendaje de 2 metrros",
+							"type": "text"
+						},
+						{
+							"key": "metric",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/inventory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"inventory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Inventories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRkYjA2YWZmOTQ1NjdhMTcxYjE1ZWY3OWM4NGU0NGQyZDJmNDNlZjhmYWUyZGJhM2E1ZjI4OGYwOGY0YWQzMDkwZjNmZThlNjcxYTc2ZWU5In0.eyJhdWQiOiIxIiwianRpIjoiNGRiMDZhZmY5NDU2N2ExNzFiMTVlZjc5Yzg0ZTQ0ZDJkMmY0M2VmOGZhZTJkYmEzYTVmMjg4ZjA4ZjRhZDMwOTBmM2ZlOGU2NzFhNzZlZTkiLCJpYXQiOjE1Mzg3NTc4NjIsIm5iZiI6MTUzODc1Nzg2MiwiZXhwIjoxNTcwMjkzODYyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.FzVWlrZZUk1srHFEax1tymqVZEV9DIWQlNo-qxim9djLzEOlE4tWErLwkayeCHE1Y_tPHBYX2hzre9tVxUCxPQ3skMjMMGTqRdWxNCcIyofvjJzPeJ9MTAAhBZSqGkGA14eIYmQggAxS9lqylu3pX0yY4bM8JoS1zycJVhoqW-ROxXNwcxTgS25eORSzjcsoX7MhtVbr7mtuj37x5BUHDxSew8F_LUBUjyYErC4uJUwy0thjjJGvQuKjXLIe3vL0iD0LjpYupUV5pqPLqjjfGittMyl7rlQkVSCMKZ9HCK2Ewrr83orCuM0NkrG9Egl7x5EkuQ2Fggv1rYbpEi1JuFnc0ldx-bDu5o-lyh1X9Rm61et0xy_qnH9vFymCgMQRsZWboyoi6yjs3qL2VXCSdeBNuPc1c0OuuyX0yUoaR5v77T7dAY3Li-6EPI6z3E4n9L3lilpdE8RbsbvCdHxXDJfD0EEneXpFtfnjPCZbDB1hH_8Tpod546gxGpJ7-J5VdVlYkOJrYiU50mUqerCihOx5cqL7gEepcx5lrE2xuOH8016DWf-JDTVkX9JD2C8B1lUZyIuV48c1pnscQ2YhYlhdtQajbs5DKOA-xnXMtwdeqURy4d5Wo4vH81m5zcBHpwXWISxU8IwvmtsQSSTEjn87g9H71TSlSNbnEa2AfrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/inventory?sort=id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"inventory"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Inventory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRkYjA2YWZmOTQ1NjdhMTcxYjE1ZWY3OWM4NGU0NGQyZDJmNDNlZjhmYWUyZGJhM2E1ZjI4OGYwOGY0YWQzMDkwZjNmZThlNjcxYTc2ZWU5In0.eyJhdWQiOiIxIiwianRpIjoiNGRiMDZhZmY5NDU2N2ExNzFiMTVlZjc5Yzg0ZTQ0ZDJkMmY0M2VmOGZhZTJkYmEzYTVmMjg4ZjA4ZjRhZDMwOTBmM2ZlOGU2NzFhNzZlZTkiLCJpYXQiOjE1Mzg3NTc4NjIsIm5iZiI6MTUzODc1Nzg2MiwiZXhwIjoxNTcwMjkzODYyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.FzVWlrZZUk1srHFEax1tymqVZEV9DIWQlNo-qxim9djLzEOlE4tWErLwkayeCHE1Y_tPHBYX2hzre9tVxUCxPQ3skMjMMGTqRdWxNCcIyofvjJzPeJ9MTAAhBZSqGkGA14eIYmQggAxS9lqylu3pX0yY4bM8JoS1zycJVhoqW-ROxXNwcxTgS25eORSzjcsoX7MhtVbr7mtuj37x5BUHDxSew8F_LUBUjyYErC4uJUwy0thjjJGvQuKjXLIe3vL0iD0LjpYupUV5pqPLqjjfGittMyl7rlQkVSCMKZ9HCK2Ewrr83orCuM0NkrG9Egl7x5EkuQ2Fggv1rYbpEi1JuFnc0ldx-bDu5o-lyh1X9Rm61et0xy_qnH9vFymCgMQRsZWboyoi6yjs3qL2VXCSdeBNuPc1c0OuuyX0yUoaR5v77T7dAY3Li-6EPI6z3E4n9L3lilpdE8RbsbvCdHxXDJfD0EEneXpFtfnjPCZbDB1hH_8Tpod546gxGpJ7-J5VdVlYkOJrYiU50mUqerCihOx5cqL7gEepcx5lrE2xuOH8016DWf-JDTVkX9JD2C8B1lUZyIuV48c1pnscQ2YhYlhdtQajbs5DKOA-xnXMtwdeqURy4d5Wo4vH81m5zcBHpwXWISxU8IwvmtsQSSTEjn87g9H71TSlSNbnEa2AfrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Vendaje 2m",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Vendaje de 2 metrros",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/inventory/29",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"inventory",
+						"29"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Inventory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRkYjA2YWZmOTQ1NjdhMTcxYjE1ZWY3OWM4NGU0NGQyZDJmNDNlZjhmYWUyZGJhM2E1ZjI4OGYwOGY0YWQzMDkwZjNmZThlNjcxYTc2ZWU5In0.eyJhdWQiOiIxIiwianRpIjoiNGRiMDZhZmY5NDU2N2ExNzFiMTVlZjc5Yzg0ZTQ0ZDJkMmY0M2VmOGZhZTJkYmEzYTVmMjg4ZjA4ZjRhZDMwOTBmM2ZlOGU2NzFhNzZlZTkiLCJpYXQiOjE1Mzg3NTc4NjIsIm5iZiI6MTUzODc1Nzg2MiwiZXhwIjoxNTcwMjkzODYyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.FzVWlrZZUk1srHFEax1tymqVZEV9DIWQlNo-qxim9djLzEOlE4tWErLwkayeCHE1Y_tPHBYX2hzre9tVxUCxPQ3skMjMMGTqRdWxNCcIyofvjJzPeJ9MTAAhBZSqGkGA14eIYmQggAxS9lqylu3pX0yY4bM8JoS1zycJVhoqW-ROxXNwcxTgS25eORSzjcsoX7MhtVbr7mtuj37x5BUHDxSew8F_LUBUjyYErC4uJUwy0thjjJGvQuKjXLIe3vL0iD0LjpYupUV5pqPLqjjfGittMyl7rlQkVSCMKZ9HCK2Ewrr83orCuM0NkrG9Egl7x5EkuQ2Fggv1rYbpEi1JuFnc0ldx-bDu5o-lyh1X9Rm61et0xy_qnH9vFymCgMQRsZWboyoi6yjs3qL2VXCSdeBNuPc1c0OuuyX0yUoaR5v77T7dAY3Li-6EPI6z3E4n9L3lilpdE8RbsbvCdHxXDJfD0EEneXpFtfnjPCZbDB1hH_8Tpod546gxGpJ7-J5VdVlYkOJrYiU50mUqerCihOx5cqL7gEepcx5lrE2xuOH8016DWf-JDTVkX9JD2C8B1lUZyIuV48c1pnscQ2YhYlhdtQajbs5DKOA-xnXMtwdeqURy4d5Wo4vH81m5zcBHpwXWISxU8IwvmtsQSSTEjn87g9H71TSlSNbnEa2AfrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/inventory/29",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"inventory",
+						"29"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Inventory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRkYjA2YWZmOTQ1NjdhMTcxYjE1ZWY3OWM4NGU0NGQyZDJmNDNlZjhmYWUyZGJhM2E1ZjI4OGYwOGY0YWQzMDkwZjNmZThlNjcxYTc2ZWU5In0.eyJhdWQiOiIxIiwianRpIjoiNGRiMDZhZmY5NDU2N2ExNzFiMTVlZjc5Yzg0ZTQ0ZDJkMmY0M2VmOGZhZTJkYmEzYTVmMjg4ZjA4ZjRhZDMwOTBmM2ZlOGU2NzFhNzZlZTkiLCJpYXQiOjE1Mzg3NTc4NjIsIm5iZiI6MTUzODc1Nzg2MiwiZXhwIjoxNTcwMjkzODYyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.FzVWlrZZUk1srHFEax1tymqVZEV9DIWQlNo-qxim9djLzEOlE4tWErLwkayeCHE1Y_tPHBYX2hzre9tVxUCxPQ3skMjMMGTqRdWxNCcIyofvjJzPeJ9MTAAhBZSqGkGA14eIYmQggAxS9lqylu3pX0yY4bM8JoS1zycJVhoqW-ROxXNwcxTgS25eORSzjcsoX7MhtVbr7mtuj37x5BUHDxSew8F_LUBUjyYErC4uJUwy0thjjJGvQuKjXLIe3vL0iD0LjpYupUV5pqPLqjjfGittMyl7rlQkVSCMKZ9HCK2Ewrr83orCuM0NkrG9Egl7x5EkuQ2Fggv1rYbpEi1JuFnc0ldx-bDu5o-lyh1X9Rm61et0xy_qnH9vFymCgMQRsZWboyoi6yjs3qL2VXCSdeBNuPc1c0OuuyX0yUoaR5v77T7dAY3Li-6EPI6z3E4n9L3lilpdE8RbsbvCdHxXDJfD0EEneXpFtfnjPCZbDB1hH_8Tpod546gxGpJ7-J5VdVlYkOJrYiU50mUqerCihOx5cqL7gEepcx5lrE2xuOH8016DWf-JDTVkX9JD2C8B1lUZyIuV48c1pnscQ2YhYlhdtQajbs5DKOA-xnXMtwdeqURy4d5Wo4vH81m5zcBHpwXWISxU8IwvmtsQSSTEjn87g9H71TSlSNbnEa2AfrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/inventory/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"inventory",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
