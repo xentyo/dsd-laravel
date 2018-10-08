@@ -91,4 +91,8 @@ class DispenserController extends APIController
         $exists = $itemSelected ? true : false;
         return $exists;
     }
+
+    public function dispense(Request $request){
+        
+    }
 }
