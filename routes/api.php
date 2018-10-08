@@ -32,7 +32,8 @@ Route::group([
         Route::get('user', 'UserController@show')->middleware('auth:api')->name('user');
         
         Route::resource('dispenser', 'DispenserController')->only($apiMethods);
-        Route::post('/dispenser/{id}/item', 'DispenserController@addItems')->name('additems');
+        Route::post('/dispenser/{id}/item', 'DispenserController@addItems')->name('add-items');
+        Route::delete('/dispenser/{id}/item', 'DispenserController@removeItems')->name('remove-items');
         Route::resource('item', 'ItemController')->only($apiMethods);        
         Route::resource('kit', 'KitController')->only($apiMethods);
         Route::resource('convertion', 'ConvertionController')->only($apiMethods);

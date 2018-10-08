@@ -18,7 +18,7 @@ class CreateTableDispenserItems extends Migration
             $table->unsignedInteger('dispenser_id');
             $table->unsignedInteger('item_id');
             $table->unsignedInteger('metric_id');
-            $table->double('quantity');
+            $table->double('quantity')->default(0);
             $table->timestamps();
 
 

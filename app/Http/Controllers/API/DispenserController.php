@@ -21,35 +21,74 @@ class DispenserController extends APIController
     public function addItems(Request $request, $id)
     {
         $validator = Validator::make($request->only('item', 'metric', 'quantity'), [
-            'item.*' => 'integer|required|exists:items,id',
-            'quantity' => 'integer|required|gte:1',
+            'item' => 'integer|required',
             'metric' => 'string|required|exists:metrics,symbol',
+            'quantity' => 'integer|required|gte:1',
         ]);
         if ($validator->fails()) {
-            return response(['errors' => $validator->messages()], 401);
-        } else {
-            $dispenser = Dispenser::find($id);
-            $metric = Metric::where('symbol', $request->get('metric'))->first();
-            $items = [];
-            if (!$dispenser) {
-                return response(['message' => "Dispenser not found"], 404);
-            }
-            $itemIds = $request->get('item');
-            foreach ($itemIds as $key => $itemId) {
-                $item = Item::find($itemId);
-                if (!$item) {
-                    return response(['message' => "Item with \"id\" "+$itemId+" not found"], 404);
-                }
-                $items[] = $item;
-            }
-            foreach($items as $item){
-                $dispenser->items()->save($item, ['metric_id' => $metric->id, 'quantity' => $request->get('quantity')]);
-            }
-            $message = count($items). " items added to dispenser: ". $dispenser->name;
-            $dispenser = Dispenser::find($dispenser->id)->first();
-            return response(['message' => $message, 'dispenser' => $dispenser]);
+            return response(['message' => 'Validation fails', 'errors' => $validator->messages()], 401);
+        }
+        $dispenser = Dispenser::find($id);
+        $metric = Metric::where('symbol', $request->get('metric'))->first();
+        $item = Item::find($request->get('item'));
+        if (!$dispenser) {
+            return response(['message' => "Dispenser not found"], 404);
+        }
+        if (!$item) {
+            return response(['message' => "Item with \"id\" "+$request->get('item')+" not found"], 404);
+        }
+        if (!$metric) {
+            return response(['message' => 'Metric not found'], 404);
+        }
+        if ($this->existsItemWithMetricInDispenser($item, $metric, $dispenser)) {
+            return response(['message' => 'This item already exists in the dispenser'], 401);
         }
 
-        return response("{}", 500);
+        $dispenser->items()->save($item, ['metric_id' => $metric->id, 'quantity' => $request->get('quantity')]);
+        $message = "Item added to dispenser: " . $dispenser->name;
+        $dispenser = Dispenser::find($dispenser->id)->first();
+
+        return response(['message' => $message, 'dispenser' => $dispenser]);
+    }
+
+    public function removeItems(Request $request, $id)
+    {
+        $validator = Validator::make($request->only('item', 'metric'), [
+            'item' => 'required|integer',
+            'metric' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response(['message' => 'Validation failed', 'errors' => $validator->messages()], 401);
+        }
+        $dispenser = Dispenser::find($id);
+        $item = Item::find($request->get('item'));
+        $metric = Metric::where('symbol', $request->get('metric'))->first();
+        if (!$dispenser) {
+            return response(['message' => "Dispenser not found"], 404);
+        }
+        if (!$item) {
+            return response(['message' => "Item with \"id\" "+$request->get('item')+" not found"], 404);
+        }
+        if (!$metric) {
+            return response(['message' => 'Metric not found'], 404);
+        }
+        if (!$this->existsItemWithMetricInDispenser($item, $metric, $dispenser)) {
+            $message = "Item with metric $metric->symbol does not exists on dispenser $dispenser->name";
+            return response(['message' => $message], 400);
+        }
+
+        $dispenser->items()->wherePivot('metric_id', $metric->id)->detach($item->id);
+
+        return response(['message' => 'Item removed from dispenser', 'dispenser' => $dispenser]);
+    }
+
+    private function existsItemWithMetricInDispenser(Item $item, Metric $metric, Dispenser $dispenser)
+    {
+        $itemSelected = $dispenser->items()
+            ->wherePivot('item_id', $item->id)
+            ->wherePivot('metric_id', $metric->id)
+            ->first();
+        $exists = $itemSelected ? true : false;
+        return $exists;
     }
 }
