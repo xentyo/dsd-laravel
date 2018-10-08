@@ -40,18 +40,24 @@ class APIController extends Controller
      */
     public function index(Request $request)
     {
-        $response = response();
-        $sort = $this->getSort($request->input('sort')) ?? $this->defaultSort;
-        $objectsArray = forward_static_call($this->class . "::orderBy", $sort)->get();
+        $params = $request->only('sort', 'direction');
+        $direction = $params['direction'] = mb_strtolower($params['direction'] ?? 'asc');
+        $validator = Validator::make($params, [
+            'sort' => 'string|alpha_dash',
+            'direction' => 'in:asc,desc'
+        ]);
+        if($validator->fails()){
+            return response(['message' => 'Validation fails', 'errors' => $validator->messages()]);
+        }
+        $sort = $params['sort'] ?? $this->defaultSort;
+        $objectsArray = forward_static_call($this->class . "::orderBy", $sort, $direction)->get();
         if (count($objectsArray) === 0) {
-            $message = 'No ' . str_plural()($this->model) . " found";
-            $response = response(['message' => $message, $this->modelListName => $objectsArray]);
+            $message = 'No ' . str_plural("$this->model") . " found";
+            return response(['message' => $message, $this->modelListName => $objectsArray]);
         } else {
             $message = count($objectsArray) . ' ' . str_plural($this->model) . " found";
-            $response = response(['message' => $message, $this->modelListName => $objectsArray]);
+            return response(['message' => $message, $this->modelListName => $objectsArray]);
         }
-
-        return $response;
     }
 
     /**
@@ -172,7 +178,6 @@ class APIController extends Controller
                 return $value;
             }
         }
-
         return null;
     }
 
