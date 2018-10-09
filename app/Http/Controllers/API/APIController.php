@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class APIController extends Controller
@@ -44,12 +45,15 @@ class APIController extends Controller
         $direction = $params['direction'] = mb_strtolower($params['direction'] ?? 'asc');
         $validator = Validator::make($params, [
             'sort' => 'string|alpha_dash',
-            'direction' => 'in:asc,desc'
+            'direction' => 'in:asc,desc',
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response(['message' => 'Validation fails', 'errors' => $validator->messages()]);
         }
         $sort = $params['sort'] ?? $this->defaultSort;
+        if (!$this->isSortInModelAttributes($sort)) {
+            return response(['message' => "$sort is available in $this->model's attributes"], 400);
+        }
         $objectsArray = forward_static_call($this->class . "::orderBy", $sort, $direction)->get();
         if (count($objectsArray) === 0) {
             $message = 'No ' . str_plural("$this->model") . " found";
@@ -190,5 +194,17 @@ class APIController extends Controller
 
             $model->$attribute = $value;
         }
+    }
+
+    protected function isSortInModelAttributes($sort)
+    {
+        $table = (new $this->class)->getTable();
+        $columns = DB::getSchemaBuilder()->getColumnListing($table);
+        foreach ($columns as $column) {
+            if ($sort === $column) {
+                return true;
+            }
+        }
+        return false;
     }
 }
