@@ -11,7 +11,7 @@ class Dispenser extends Model
     public function items()
     {
         return $this->belongsToMany(Item::class, 'dispenser_items')
-            ->withPivot('quantity', 'created_at', 'updated_at');
+            ->withPivot('quantity', 'metric_id', 'created_at', 'updated_at');
     }
 
     public function kits()

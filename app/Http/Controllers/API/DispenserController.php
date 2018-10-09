@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Dispenser;
 use App\Item;
+use App\Kit;
+use App\Movement;
+use App\MovementType;
 use Illuminate\Http\Request;
 use Stevebauman\Inventory\Models\Metric;
 use Validator;
@@ -92,7 +95,69 @@ class DispenserController extends APIController
         return $exists;
     }
 
-    public function dispense(Request $request){
-        
+    public function dispense(Request $request, $id)
+    {
+        $validator = Validator::make($request->only('quantity', 'item', 'kit'), [
+            'quantity' => 'required|numeric',
+            'item' => 'required_without:kit|integer',
+            'kit' => 'required_without:item|integer',
+        ]);
+        if ($validator->fails()) {
+            return response(['message' => 'Validation fails', 'errors' => $validator->messages()], 400);
+        }
+        if ($request->input('item') && $request->input('kit')) {
+            return response(['message' => 'We can not dispense a kit and an item at same time'], 400);
+        }
+
+        $dispenser = Dispenser::find($id);
+        if (!$dispenser) {
+            return response(['message' => 'Dispenser not found'], 404);
+        }
+        $item = Item::find($request->input('item'));
+        $kit = Kit::find($request->input('kit'));
+        $quantity = $request->input('quantity');
+        if ($request->input('item') && !$item) {
+            return response(['message' => 'Item not found'], 404);
+        }
+        if ($request->input('kit') && !$kit) {
+            return response(['message' => 'Kit not found'], 404);
+        }
+
+        if ($item) {
+            return $this->dispenseItem($dispenser, $item, $quantity);
+        }
+        if ($kit) {
+            return $this->dispenseKit($dispenser, $kit, $quantity);
+        }
+    }
+
+    protected function dispenseItem(Dispenser $dispenser, Item $item, $quantity)
+    {
+        $itemInDispenser = $dispenser->items()->where('item_id', $item->id)->first();
+        if (!$itemInDispenser) {
+            return response(['message' => 'Item not found in Dispenser'], 404);
+        }
+        $movementType = MovementType::where('name', 'item')->first();
+        $movementData = [
+            'quantity' => $quantity,
+            'type_id' =>$movementType->name,
+            'metric_id' => $itemInDispenser->pivot->metric_id,
+            'item_id' => $itemInDispenser->pivot->item_id,
+            'dispenser_id' => $itemInDispenser->pivot->dispenser_id,
+        ];
+        $movement = new Movement($movementData);
+        $movement->save();
+        $dispenser->items()->updateExistingPivot($item->id,
+            [
+                'quantity' => $itemInDispenser->pivot->quantity -= $quantity,
+            ]
+        );
+
+        return response(['message' => 'Movement done', 'item' => $itemInDispenser, 'movement' => $movement]);
+    }
+
+    protected function dispenseKit(Dispenser $dispenser, Kit $kit, $quantity)
+    {
+        return response(['message' => 'Not implemented'], 501);
     }
 }
