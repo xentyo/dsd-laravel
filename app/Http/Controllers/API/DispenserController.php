@@ -26,7 +26,7 @@ class DispenserController extends APIController
             'quantity' => 'integer|required|gte:1',
         ]);
         if ($validator->fails()) {
-            return response(['message' => 'Validation fails', 'errors' => $validator->messages()], 401);
+            return response(['message' => 'Validation fails', 'errors' => $validator->messages()], 400);
         }
         $dispenser = Dispenser::find($id);
         $metric = Metric::where('symbol', $request->get('metric'))->first();
@@ -41,7 +41,7 @@ class DispenserController extends APIController
             return response(['message' => 'Metric not found'], 404);
         }
         if ($this->existsItemWithMetricInDispenser($item, $metric, $dispenser)) {
-            return response(['message' => 'This item already exists in the dispenser'], 401);
+            return response(['message' => 'This item already exists in the dispenser'], 400);
         }
 
         $dispenser->items()->save($item, ['metric_id' => $metric->id, 'quantity' => $request->get('quantity')]);
