@@ -10,6 +10,7 @@ use App\MovementType;
 use Illuminate\Http\Request;
 use Stevebauman\Inventory\Models\Metric;
 use Validator;
+use Auth;
 
 class DispenserController extends APIController
 {
@@ -147,6 +148,7 @@ class DispenserController extends APIController
             'metric_id' => $itemInDispenser->pivot->metric_id,
             'item_id' => $itemInDispenser->pivot->item_id,
             'dispenser_id' => $itemInDispenser->pivot->dispenser_id,
+            'user_id' => Auth::user()->id,
         ];
         $movement = new Movement($movementData);
         $movement->save();

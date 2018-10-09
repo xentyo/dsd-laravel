@@ -19,6 +19,7 @@ class CreateMovementsTable extends Migration
             $table->unsignedInteger('item_id');
             $table->string('type_id');
             $table->unsignedInteger('metric_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->double('quantity');
             $table->timestamps();
 
@@ -26,6 +27,9 @@ class CreateMovementsTable extends Migration
             $table->foreign('item_id')->references('id')->on('items');
             $table->foreign('type_id')->references('name')->on('movement_types');
             $table->foreign('metric_id')->references('id')->on('metrics');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->softDeletes();
         });
     }
 
