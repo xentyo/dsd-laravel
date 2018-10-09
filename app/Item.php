@@ -11,7 +11,7 @@ class Item extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        if($this->pivot) $this->appends = ['quantity'];
+        if($this->pivot) $this->appends[] = 'quantity';
     }
 
     public function inventory()
