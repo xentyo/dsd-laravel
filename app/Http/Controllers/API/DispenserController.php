@@ -137,10 +137,13 @@ class DispenserController extends APIController
         if (!$itemInDispenser) {
             return response(['message' => 'Item not found in Dispenser'], 404);
         }
+        if ($itemInDispenser->pivot->quantity < $quantity) {
+            return response(['message' => 'Insufficient quantity'], 400);
+        }
         $movementType = MovementType::where('name', 'item')->first();
         $movementData = [
             'quantity' => $quantity,
-            'type_id' =>$movementType->name,
+            'type_id' => $movementType->name,
             'metric_id' => $itemInDispenser->pivot->metric_id,
             'item_id' => $itemInDispenser->pivot->item_id,
             'dispenser_id' => $itemInDispenser->pivot->dispenser_id,
@@ -153,7 +156,7 @@ class DispenserController extends APIController
             ]
         );
 
-        return response(['message' => 'Movement done', 'item' => $itemInDispenser, 'movement' => $movement]);
+        return response(['message' => 'Movement done', 'movement' => $movement]);
     }
 
     protected function dispenseKit(Dispenser $dispenser, Kit $kit, $quantity)
