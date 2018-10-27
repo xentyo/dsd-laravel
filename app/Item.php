@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Stevebauman\Inventory\Models\InventoryStock as Stock;
 
 class Item extends Model
 {
@@ -14,9 +15,9 @@ class Item extends Model
         if($this->pivot) $this->appends[] = 'quantity';
     }
 
-    public function inventory()
+    public function stock()
     {
-        return $this->belongsTo(Inventoy::class);
+        return $this->belongsTo(Stock::class);
     }
 
     public function kits()

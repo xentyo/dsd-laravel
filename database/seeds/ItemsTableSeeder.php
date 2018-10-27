@@ -14,8 +14,13 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        $items = ['AGUJAS', 'CANULAS', 'MASCARILLAS', 'JERINGAS', 'CATETERES', 'GUANTES', 'GABACHAS', 'PRESERVATIVOS', 'SONDAS', 'TUBOS', 'PINZAS', 'ADHESIVOS', 'APÓSITOS', 'GASAS', 'HUATAS', 'VENDAS', 'RESUCITADORES', 'NYLON', 'POLIESTERES', 'POLIPROPILENOS', 'DIALIZADORES', 'IMPLANTES', 'LENTES', 'TROCARS', 'INJERTOS', 'VÁLVULAS'];
-        foreach ($items as $key => $name) $items[$key] = ucfirst(mb_strtolower($name));
+        $file = File::get('database/seeds/scripts/data/materials.json');
+        $items = [];
+        foreach (json_decode($file) as $key => $value) {
+            if ($key > 0) {
+                $items[] = ucfirst(mb_strtolower($value->name));
+            }
+        }
 
         $metricPiece = Metric::where('symbol', 'pz')->first();
         $metricPackage = Metric::where('symbol', 'pkg')->first();
@@ -26,12 +31,15 @@ class ItemsTableSeeder extends Seeder
             ]);
             $inventory->save();
 
-            $item = new Item([
-                'name' => $name
-            ]);
-            $item->inventory_id = $inventory->id;
-            $item->metric_id = $metricPiece->id;
-            $item->save();
+            try {
+                $item = new Item([
+                    'name' => $name
+                ]);
+                $item->inventory_id = $inventory->id;
+                $item->metric_id = $metricPiece->id;
+                $item->save();
+            } catch (PDOException $ex) {
+            }
         }
     }
 }

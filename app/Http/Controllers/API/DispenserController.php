@@ -38,12 +38,13 @@ class DispenserController extends APIController
             return response(['message' => "Dispenser not found"], 404);
         }
         if (!$item) {
-            return response(['message' => "Item with \"id\" "+$request->get('item')+" not found"], 404);
+            return response(['message' => "Item with \"id\" " + $request->get('item') + " not found"], 404);
         }
         if (!$metric) {
             return response(['message' => 'Metric not found'], 404);
         }
         if ($this->existsItemWithMetricInDispenser($item, $metric, $dispenser)) {
+            dd($item->stock);
             return response(['message' => 'This item already exists in the dispenser'], 400);
         }
 
@@ -70,7 +71,7 @@ class DispenserController extends APIController
             return response(['message' => "Dispenser not found"], 404);
         }
         if (!$item) {
-            return response(['message' => "Item with \"id\" "+$request->get('item')+" not found"], 404);
+            return response(['message' => "Item with \"id\" " + $request->get('item') + " not found"], 404);
         }
         if (!$metric) {
             return response(['message' => 'Metric not found'], 404);
@@ -150,16 +151,13 @@ class DispenserController extends APIController
         ];
         $movement = new Movement($movementData);
         $movement->save();
-        $dispenser->items()->updateExistingPivot($item->id,
-            [
-                'quantity' => $itemInDispenser->pivot->quantity -= $quantity,
-            ]
-        );
+        $updatedQuantity = $itemInDispenser->pivot->quantity - $quantity;
+        $dispenser->items()->updateExistingPivot($item->id, ['quantity' => $updatedQuantity]);
 
         return response(['message' => 'Movement done', 'movement' => $movement]);
     }
 
-    protected function dispenseKit(Dispenser $dispenser, Kit $kit, $quantity)
+    protected function dispenseKit(Dispenser $dispenser, Kit $kit, int $quantity)
     {
         return response(['message' => 'Not implemented'], 501);
     }

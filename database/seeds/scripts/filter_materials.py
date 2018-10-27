@@ -1,14 +1,14 @@
-import os
 import csv
+import json
 
-current_folder = os.path.dirname(os.path.abspath(__file__))
+f = open('data/materials.json', 'w')
 
-csv_materials = current_folder + "\\csv\\materials.csv"
-
-with open(csv_materials, newline="\n", encoding="utf8") as csvfile:
-    reader = csv.DictReader(csvfile, delimiter=",")
-    names = []
+with open("data/materials.csv", 'r') as csvfile:
+    array = []
+    reader = csv.DictReader(csvfile, delimiter=",", fieldnames=['id', 'name'])
     for row in reader:
-        if(row['name'] not in names and " " not in row['name']):
-            names.append(row['name'])
-    print(names)
+        array.append({
+            'id': row['id'],
+            'name' : row['name']
+        })
+    json.dump(array, f)
