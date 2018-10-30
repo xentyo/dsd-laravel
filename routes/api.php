@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 Route::group([
     'namespace' => 'API',
+    'prefix' => 'v1'
 ], function () {
     Route::group([
         'as' => 'dsd-auth::',
